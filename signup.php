@@ -93,10 +93,18 @@ function test_input($data)
 
 <body>
     <form name="signup" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="email">email</label><input type="email" name="email" value="<?php echo $email; ?>" required><span class="error">* <?php echo $emailError; ?></span>
-        <label for="password">password</label><input type="password" name="password" value="<?php echo $password; ?>" required minlength="8"><span class="error"><?php echo $passError; ?></span>
-        <label for="verifypassword">verify password</label><input type="password" name="verifypassword" value="<?php echo $verifypassword; ?>" required minlength="8"><span class="error"><?php echo $verifyPassError; ?></span>
-        <span></span><input type="submit" value="Sign Up"><span></span>
+        <label for="email">email</label>
+        <input type="email" name="email" value="<?php echo $email; ?>" required>
+        <span class="error">* <?php echo $emailError; ?></span>
+        <label for="password">password</label>
+        <input type="password" name="password" value="<?php echo $password; ?>" required minlength="8" maxlength="32">
+        <span class="error"><?php echo $passError; ?></span>
+        <label for="verifypassword">verify password</label>
+        <input type="password" name="verifypassword" value="<?php echo $verifypassword; ?>" required minlength="8" maxlength="32">
+        <span class="error"><?php echo $verifyPassError; ?></span>
+        <span></span>
+        <input type="submit" value="Sign Up">
+        <span></span>
     </form>
 
     <p>
