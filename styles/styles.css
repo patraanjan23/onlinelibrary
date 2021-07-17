@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form {
+  min-width: 800px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+form .error {
+  color: red;
+}
+
+form * {
+  padding: 0.2rem;
+}
+
+form input {
+  height: 24px;
+}
+
+form input[type=submit] {
+  height: 48px;
+  -webkit-box-shadow: 1px 1px 4px gray;
+          box-shadow: 1px 1px 4px gray;
+}
+
+form label {
+  text-align: right;
+  text-transform: capitalize;
+}
+
+form span {
+  text-transform: capitalize;
+  font-size: small;
+}
+/*# sourceMappingURL=styles.css.map */
