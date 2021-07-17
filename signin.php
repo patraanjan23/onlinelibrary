@@ -65,9 +65,9 @@ function test_input($data)
 </head>
 
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="email">email</label><input type="text" name="email" value="<?php echo $email; ?>"><span class="error">* <?php echo $emailError; ?></span>
-        <label for="password">password</label><input type="password" name="password" value="<?php echo $password; ?>"><span class="error"><?php echo $passError; ?></span>
+    <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <label for="email">email</label><input type="email" name="email" value="<?php echo $email; ?>" required><span class="error">* <?php echo $emailError; ?></span>
+        <label for="password">password</label><input type="password" name="password" value="<?php echo $password; ?>" required minlength="8"><span class="error"><?php echo $passError; ?></span>
         <span></span><input type="submit" value="Login"><span></span>
     </form>
 </body>
