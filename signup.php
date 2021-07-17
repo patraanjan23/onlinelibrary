@@ -40,8 +40,8 @@ function check_user_exists($conn, $email)
 {
     $sql = "SELECT email FROM users WHERE email='$email'";
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    if ($row['email'] === $email) {
+
+    if ($result->num_rows > 0) {
         return true;
     }
     return false;
@@ -50,7 +50,8 @@ function check_user_exists($conn, $email)
 function submit_form()
 {
     $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'] . $GLOBALS['verifyPassError'];
-    if ($formOk === "") {
+    $formEmpty = $GLOBALS['email'] . $GLOBALS['password'] . $GLOBALS['verifypassword'];
+    if ($formOk === "" && $formEmpty !== "") {
         $email = $GLOBALS['email'];
         $password = $GLOBALS['password'];
         $passhash = password_hash($password, PASSWORD_DEFAULT);
