@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# project related stuff
+*.scss
+*.map
+*test*
+*dummy*
