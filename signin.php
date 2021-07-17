@@ -25,6 +25,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+$formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
+$formEmpty = $email . $password;
+if ($formOk === "" && $formEmpty !== "") {
+    session_start();
+    $sql = "SELECT password FROM users WHERE email='$email'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $passhash = $result->fetch_assoc()['password'];
+        $loggedin = password_verify($password, $passhash);
+        if ($loggedin) {
+            $_SESSION['loggedin'] = $loggedin;
+            $_SESSION['email'] = $email;
+            echo 'user logged in';
+            session_unset();
+            session_destroy();
+        } else {
+            $passError = "invalid password, try again";
+        }
+    }
+} else {
+    echo "form invalid";
+}
+
 function test_input($data)
 {
     $data = trim($data);
@@ -50,32 +73,3 @@ function test_input($data)
 </body>
 
 </html>
-
-<?php
-$formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
-if ($formOk === "") {
-    session_start();
-    $sql = "SELECT password FROM users WHERE email='$email'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $passhash = $result->fetch_assoc()['password'];
-    }
-    // echo $email . "<br>" . $password . "<br>";
-    if (isset($passhash)) {
-        $loggedin = password_verify($password, $passhash);
-        if ($loggedin) {
-            $_SESSION['loggedin'] = $loggedin;
-            $_SESSION['email'] = $email;
-            echo 'user logged in';
-            session_unset();
-            session_destroy();
-        } else {
-            // echo "Invalid password try again";
-            $passError = "invalid password, try again";
-        }
-    }
-} else {
-    echo "form invalid";
-}
-
-?>
