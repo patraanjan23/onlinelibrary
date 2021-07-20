@@ -1,5 +1,6 @@
 <?php
 require_once('includes/dbconnect.php');
+$userMsg = "";
 $email = $password = "";
 $emailError = $passError = "";
 
@@ -37,15 +38,18 @@ if ($formOk === "" && $formEmpty !== "") {
         if ($loggedin) {
             $_SESSION['loggedin'] = $loggedin;
             $_SESSION['email'] = $email;
-            echo 'user logged in';
+            // echo 'user logged in';
+            $userMsg = 'user logged in';
             session_unset();
             session_destroy();
         } else {
             $passError = "invalid password, try again";
         }
+    } else {
+        $userMsg = "user does not exist";
     }
 } else {
-    echo "form invalid";
+    $userMsg = 'form invalid';
 }
 
 function test_input($data)
@@ -65,17 +69,22 @@ function test_input($data)
 </head>
 
 <body>
-    <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="email">email</label>
-        <input type="email" name="email" value="<?php echo $email; ?>" required>
-        <span class="error">* <?php echo $emailError; ?></span>
-        <label for="password">password</label>
-        <input type="password" name="password" value="<?php echo $password; ?>" required minlength="8" maxlength="32">
-        <span class="error"><?php echo $passError; ?></span>
-        <span></span>
-        <input type="submit" value="Login">
-        <span></span>
-    </form>
+    <div class="center">
+        <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <label for="email">email</label>
+            <input type="email" name="email" placeholder="yourname@example.com" value="<?php echo $email; ?>" required>
+            <span class="error">* <?php echo $emailError; ?></span>
+
+            <label for="password">password</label>
+            <input type="password" name="password" placeholder="********" value="<?php echo $password; ?>" minlength="8" maxlength="32" required>
+            <span class="error"><?php echo $passError; ?></span>
+
+            <span></span>
+            <input type="submit" value="Login">
+            <span></span>
+        </form>
+        <span><?php echo $userMsg ?></span>
+    </div>
 </body>
 
 </html>

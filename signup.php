@@ -1,5 +1,6 @@
 <?php
 require_once('includes/dbconnect.php');
+$userMsg = "";
 $email = $password = $verifypassword = "";
 $emailError = $passError = $verifyPassError = "";
 
@@ -47,33 +48,30 @@ function check_user_exists($conn, $email)
     return false;
 }
 
-function submit_form()
-{
-    $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'] . $GLOBALS['verifyPassError'];
-    $formEmpty = $GLOBALS['email'] . $GLOBALS['password'] . $GLOBALS['verifypassword'];
-    if ($formOk === "" && $formEmpty !== "") {
-        $email = $GLOBALS['email'];
-        $password = $GLOBALS['password'];
-        $passhash = password_hash($password, PASSWORD_DEFAULT);
-        $conn = $GLOBALS['conn'];
-        echo $email . "<br>" . $password . "<br>" . $passhash;
-        if (check_user_exists($conn, $email)) {
-            echo '<br> User already exists';
-        } else {
-            echo '<br> User does not exist';
-            $sql = "INSERT INTO library.users (password, name, email, acc_type, mobile, address) 
-                                        VALUES('$passhash', NULL, '$email', 'normal', NULL, NULL)";
-            $result = $conn->query($sql);
-            if (!$result) {
-                echo 'could not create user';
-            } else {
-                echo 'user ' . $email . ' created successfully';
-            }
-        }
+$formOk = $GLOBALS['emailError'] . $GLOBALS['passError'] . $GLOBALS['verifyPassError'];
+$formEmpty = $GLOBALS['email'] . $GLOBALS['password'] . $GLOBALS['verifypassword'];
+if ($formOk === "" && $formEmpty !== "") {
+    $email = $GLOBALS['email'];
+    $password = $GLOBALS['password'];
+    $passhash = password_hash($password, PASSWORD_DEFAULT);
+
+    if (check_user_exists($conn, $email)) {
+        $userMsg = 'user already exists';
     } else {
-        echo "form invalid";
+        $userMsg = 'user does not exist';
+        $sql = "INSERT INTO library.users (password, name, email, acc_type, mobile, address) 
+                                        VALUES('$passhash', NULL, '$email', 'normal', NULL, NULL)";
+        $result = $conn->query($sql);
+        if (!$result) {
+            $userMsg = $userMsg . "<br>" . 'could not create user';
+        } else {
+            $userMsg = $userMsg . "<br>" . 'user ' . $email . ' created successfully';
+        }
     }
+} else {
+    $userMsg = "form invalid";
 }
+
 
 function test_input($data)
 {
@@ -92,25 +90,27 @@ function test_input($data)
 </head>
 
 <body>
-    <form name="signup" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="email">email</label>
-        <input type="email" name="email" value="<?php echo $email; ?>" required>
-        <span class="error">* <?php echo $emailError; ?></span>
-        <label for="password">password</label>
-        <input type="password" name="password" value="<?php echo $password; ?>" required minlength="8" maxlength="32">
-        <span class="error"><?php echo $passError; ?></span>
-        <label for="verifypassword">verify password</label>
-        <input type="password" name="verifypassword" value="<?php echo $verifypassword; ?>" required minlength="8" maxlength="32">
-        <span class="error"><?php echo $verifyPassError; ?></span>
-        <span></span>
-        <input type="submit" value="Sign Up">
-        <span></span>
-    </form>
+    <div class="center">
+        <form name="signup" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <label for="email">email</label>
+            <input type="email" name="email" value="<?php echo $email; ?>" required placeholder="yourname@example.com">
+            <span class="error">* <?php echo $emailError; ?></span>
 
-    <p>
-        <?php submit_form(); ?>
-    </p>
+            <label for="password">password</label>
+            <input type="password" name="password" value="<?php echo $password; ?>" required minlength="8" maxlength="32" placeholder="********">
+            <span class="error"><?php echo $passError; ?></span>
 
+            <label for="verifypassword">verify password</label>
+            <input type="password" name="verifypassword" value="<?php echo $verifypassword; ?>" required minlength="8" maxlength="32" placeholder="********">
+            <span class="error"><?php echo $verifyPassError; ?></span>
+
+            <span></span>
+            <input type="submit" value="Sign Up">
+            <span></span>
+        </form>
+        <span><?php echo $userMsg ?></span>
+        <?php echo $email . "<br>" . $password . "<br>" . (isset($passhash) ? $passhash : ""); ?>
+    </div>
 </body>
 
 </html>
