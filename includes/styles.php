@@ -1,1 +1,1 @@
-<?php echo '<link rel="stylesheet" href="styles/styles.css">';
+<link rel="stylesheet" type="text/css" href="styles/styles.css">
