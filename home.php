@@ -8,6 +8,7 @@
 
 <body>
     <?php require('components/_header.php'); ?>
+    <?php require('components/_search.php'); ?>
     <div class="spacer center">
         <main>
             hello world
