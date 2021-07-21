@@ -42,7 +42,7 @@ body {
   min-width: 800px;
 }
 
-.search form input[type=search] {
+.search form input[type="search"] {
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -133,7 +133,7 @@ footer .footer ul {
   display: grid;
   -ms-grid-rows: (32px)[4];
       grid-template-rows: repeat(4, 32px);
-  gap: 4px;
+  gap: 8px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -152,6 +152,18 @@ footer .footer ul li {
 footer .footer ul li a {
   text-decoration: none;
   color: black;
+}
+
+footer .footer .sponsors ul li {
+  gap: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+footer .footer .sponsors ul li img {
+  height: 32px;
+  width: 32px;
 }
 
 footer .copyright {
