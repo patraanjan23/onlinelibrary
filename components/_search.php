@@ -1,8 +1,15 @@
 <?php
-if (!isset($GLOBALS['searchBy'])) {
-    $GLOBALS['searchBy'] = 'title';
-} else {
-    $searchBy = $GLOBALS['searchBy'];
+require_once('includes/sanitizer.php');
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['search']) || empty($_GET['search']));
+    else {
+        $searchQ = sanitize_input($_GET['search']);
+    }
+    if (!isset($_GET['searchby'])) {
+        $searchBy = 'title';
+    } else {
+        $searchBy = sanitize_input($_GET['searchby']);
+    }
 }
 ?>
 <div class="search">
@@ -23,7 +30,7 @@ if (!isset($GLOBALS['searchBy'])) {
                 </label>
             </div>
         </div>
-        <input type="search" name="search" id="searchbox" placeholder="Search Book by Title, Author or ISBN" required>
+        <input type="search" name="search" id="searchbox" placeholder="Search Book by Title, Author or ISBN" value="<?php if (isset($searchQ) && !empty($searchQ)) echo $searchQ; ?>" required>
         <input type="submit" value="Search">
     </form>
 </div>
