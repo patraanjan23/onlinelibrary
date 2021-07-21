@@ -9,7 +9,6 @@
       <li><a href="browse.php">Browse</a></li>
       <li><a href="signin.php">Login</a></li>
       <li><a href="about.php">About</a></li>
-      <li><a href="contact.php">Contact Us</a></li>
     </ul>
   </nav>
 </header>
