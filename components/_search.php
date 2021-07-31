@@ -1,3 +1,4 @@
+<?php require('_nodirectaccess.php'); ?>
 <?php
 require_once('includes/sanitizer.php');
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

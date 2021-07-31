@@ -1,3 +1,5 @@
+<?php require('_nodirectaccess.php'); ?>
+
 <h4>Contact Us</h4>
 <ul>
     <li>

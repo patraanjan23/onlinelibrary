@@ -1,3 +1,4 @@
+<?php require('_nodirectaccess.php'); ?>
 <footer>
     <div class="footer">
         <div class="sponsors">

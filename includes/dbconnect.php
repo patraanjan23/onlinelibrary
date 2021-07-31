@@ -1,6 +1,7 @@
+<?php require('components/_nodirectaccess.php'); ?>
 <?php
-
-function db_connect() {
+function db_connect()
+{
     static $connection;
 
     if (!isset($connection)) {

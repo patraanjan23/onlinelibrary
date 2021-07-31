@@ -1,3 +1,5 @@
+<?php define('direct-access', TRUE); ?>
+
 <!DOCTYPE html>
 <html>
 

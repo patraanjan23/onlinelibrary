@@ -1,3 +1,4 @@
+<?php require('_nodirectaccess.php'); ?>
 <header>
   <div class="site-identity">
     <a href="home.php"><img src="assets/logo.jpeg" width="82px" height="80px" alt="logo"></a>
