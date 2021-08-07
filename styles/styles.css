@@ -102,6 +102,22 @@ header .site-navigation li a:hover {
   color: white;
 }
 
+header .site-navigation li form button {
+  font-size: 100%;
+  display: block;
+  border: none;
+  background: none;
+  padding: 1em 1.5em;
+  border-radius: 4px;
+  color: black;
+}
+
+header .site-navigation li form button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
 footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -202,7 +218,8 @@ footer .copyright {
   text-transform: capitalize;
 }
 
-.styled-table th, .styled-table td {
+.styled-table th,
+.styled-table td {
   padding: 12px 15px;
 }
 
@@ -230,9 +247,10 @@ footer .copyright {
       grid-template-columns: minmax(400px, 0.25fr) 1fr;
   -ms-grid-rows: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
-      grid-template-areas: 'cover .' 'cover .' 'cover .' 'cover .' 'cover .' 'cover .' 'cover .';
+      grid-template-areas: "cover ." "cover ." "cover ." "cover ." "cover ." "cover ." "cover .";
   padding: 1rem;
   width: 60%;
+  min-width: 800px;
   border-radius: 8px;
   margin-bottom: 1rem;
   -webkit-box-shadow: 1px 1px 8px #999;
@@ -262,7 +280,8 @@ footer .copyright {
   margin: 1rem;
 }
 
-form[name="signin"], form[name="signup"] {
+form[name="signin"],
+form[name="signup"] {
   min-width: 800px;
   width: 80%;
   display: -ms-grid;
@@ -276,16 +295,19 @@ form[name="signin"], form[name="signup"] {
           column-gap: 8px;
 }
 
-form[name="signin"] .error, form[name="signup"] .error {
+form[name="signin"] .error,
+form[name="signup"] .error {
   color: red;
 }
 
-form[name="signin"] input, form[name="signup"] input {
+form[name="signin"] input,
+form[name="signup"] input {
   padding: 2px 1rem;
   letter-spacing: 1px;
 }
 
-form[name="signin"] label, form[name="signup"] label {
+form[name="signin"] label,
+form[name="signup"] label {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -293,7 +315,8 @@ form[name="signin"] label, form[name="signup"] label {
   text-transform: capitalize;
 }
 
-form[name="signin"] span, form[name="signup"] span {
+form[name="signin"] span,
+form[name="signup"] span {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;

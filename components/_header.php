@@ -8,8 +8,16 @@
     <ul class="nav">
       <li><a href="home.php">Home</a></li>
       <li><a href="browse.php">Browse</a></li>
-      <li><a href="signin.php">Login</a></li>
-      <li><a href="signup.php">Register</a></li>
+      <?php if (!empty($_SESSION['email']) || isset($_SESSION['email'])) { ?>
+        <li>
+          <form action="logout.php" method="post">
+            <button type="submit" name="logout">Log Out</button>
+          </form>
+        </li>
+      <?php } else { ?>
+        <li><a href="signin.php">Login</a></li>
+        <li><a href="signup.php">Register</a></li>
+      <?php } ?>
       <li><a href="about.php">About</a></li>
     </ul>
   </nav>

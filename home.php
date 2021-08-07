@@ -1,4 +1,4 @@
-<?php define('direct-access', TRUE); ?>
+<?php require('includes/init.php'); ?>
 
 <!DOCTYPE html>
 <html>

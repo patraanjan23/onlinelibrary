@@ -1,4 +1,5 @@
-<?php define('direct-access', true); ?>
+<?php require('includes/init.php'); ?>
+
 <?php
 require_once('includes/dbconnect.php');
 $userMsg = "";
@@ -30,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
 $formEmpty = $email . $password;
 if ($formOk === "" && $formEmpty !== "") {
-    session_start();
     $sql = "SELECT password FROM users WHERE email='$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -40,8 +40,7 @@ if ($formOk === "" && $formEmpty !== "") {
             $_SESSION['loggedin'] = $loggedin;
             $_SESSION['email'] = $email;
             $userMsg = 'user logged in';
-            session_unset();
-            session_destroy();
+            header("location:/onlinelibrary/home.php");
         } else {
             $passError = "invalid password, try again";
         }

@@ -1,4 +1,5 @@
-<?php define('direct-access', true); ?>
+<?php require('includes/init.php'); ?>
+
 <?php
 require_once('includes/dbconnect.php');
 $userMsg = "";
