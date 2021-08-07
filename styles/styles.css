@@ -262,7 +262,7 @@ footer .copyright {
   margin: 1rem;
 }
 
-form[name="signin"] {
+form[name="signin"], form[name="signup"] {
   min-width: 800px;
   width: 80%;
   display: -ms-grid;
@@ -276,16 +276,16 @@ form[name="signin"] {
           column-gap: 8px;
 }
 
-form[name="signin"] .error {
+form[name="signin"] .error, form[name="signup"] .error {
   color: red;
 }
 
-form[name="signin"] input {
+form[name="signin"] input, form[name="signup"] input {
   padding: 2px 1rem;
   letter-spacing: 1px;
 }
 
-form[name="signin"] label {
+form[name="signin"] label, form[name="signup"] label {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -293,11 +293,16 @@ form[name="signin"] label {
   text-transform: capitalize;
 }
 
-form[name="signin"] span {
+form[name="signin"] span, form[name="signup"] span {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
   font-size: small;
   text-transform: capitalize;
+}
+
+form[name="signup"] {
+  -ms-grid-rows: (48px)[4];
+      grid-template-rows: repeat(4, 48px);
 }
 /*# sourceMappingURL=styles.css.map */

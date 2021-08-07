@@ -1,3 +1,4 @@
+<?php define('direct-access', true); ?>
 <?php
 require_once('includes/dbconnect.php');
 $userMsg = "";
@@ -90,7 +91,10 @@ function test_input($data)
 </head>
 
 <body>
-    <div class="center">
+    <?php require('components/_header.php'); ?>
+    <?php require('components/_search.php'); ?>
+    <div class="spacer center">
+        <h2 class="padded">Register</h2>
         <form name="signup" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label for="email">email</label>
             <input type="email" name="email" value="<?php echo $email; ?>" required placeholder="yourname@example.com">
@@ -108,9 +112,10 @@ function test_input($data)
             <input type="submit" value="Sign Up">
             <span></span>
         </form>
-        <span><?php echo $userMsg ?></span>
         <?php echo $email . "<br>" . $password . "<br>" . (isset($passhash) ? $passhash : ""); ?>
+        <span class="padded"><?php echo $userMsg ?></span>
     </div>
+    <?php require('components/_footer.php'); ?>
 </body>
 
 </html>

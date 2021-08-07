@@ -9,6 +9,7 @@
       <li><a href="home.php">Home</a></li>
       <li><a href="browse.php">Browse</a></li>
       <li><a href="signin.php">Login</a></li>
+      <li><a href="signup.php">Register</a></li>
       <li><a href="about.php">About</a></li>
     </ul>
   </nav>
