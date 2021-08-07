@@ -27,6 +27,7 @@ function show_book($result)
             $description = $row['description'];
             $edition = $row['edition'];
             $category = $row['category'];
+            $bookavailable = $row['borrow_date'] ? ($row['return_date'] ? (strtotime($row['return_date']) > strtotime($row['borrow_date']) ? true : false) : false) : true;
             require('components/_bookdetails.php');
         }
     }

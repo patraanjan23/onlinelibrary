@@ -9,6 +9,7 @@ if (!isset($category)) $category = $na;
 if (!isset($description)) $description = $na;
 if (!isset($isbn)) $isbn = $na;
 if (!isset($edition)) $edition = $na;
+if (!isset($bookavailable)) $bookavailable = false;
 ?>
 
 <div class="bookdetails">
@@ -37,5 +38,5 @@ if (!isset($edition)) $edition = $na;
         <h3>edition</h3>
         <p><?php echo $edition; ?> </p>
     </div>
-    <button>Borrow</button>
+    <button <?php echo $bookavailable ? "" : "disabled"; ?>><?php echo $bookavailable ? 'Borrow' : 'Unavailable'; ?></button>
 </div>
