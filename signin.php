@@ -1,3 +1,4 @@
+<?php define('direct-access', true); ?>
 <?php
 require_once('includes/dbconnect.php');
 $userMsg = "";
@@ -38,7 +39,6 @@ if ($formOk === "" && $formEmpty !== "") {
         if ($loggedin) {
             $_SESSION['loggedin'] = $loggedin;
             $_SESSION['email'] = $email;
-            // echo 'user logged in';
             $userMsg = 'user logged in';
             session_unset();
             session_destroy();
@@ -69,7 +69,10 @@ function test_input($data)
 </head>
 
 <body>
-    <div class="center">
+    <?php require('components/_header.php'); ?>
+    <?php require('components/_search.php'); ?>
+    <div class="spacer center">
+        <h2 class="padded">Login</h2>
         <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label for="email">email</label>
             <input type="email" name="email" placeholder="yourname@example.com" value="<?php echo $email; ?>" required>
@@ -83,8 +86,9 @@ function test_input($data)
             <input type="submit" value="Login">
             <span></span>
         </form>
-        <span><?php echo $userMsg ?></span>
+        <span class="padded"><?php echo $userMsg ?></span>
     </div>
+    <?php require('components/_footer.php'); ?>
 </body>
 
 </html>
