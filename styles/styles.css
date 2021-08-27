@@ -537,4 +537,15 @@ form[name="signup"] {
   background-color: #ffffff;
   cursor: pointer;
 }
+
+.admin-panel {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.admin-panel li {
+  padding: 0 1rem;
+}
 /*# sourceMappingURL=styles.css.map */
