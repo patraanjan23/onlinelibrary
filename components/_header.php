@@ -1,4 +1,8 @@
 <?php require('_nodirectaccess.php'); ?>
+<script>
+  // to avoid FOUC (Flash Of Unstyled Content) on the Firefox site: https://bugzilla.mozilla.org/show_bug.cgi?id=1404468
+  0
+</script>
 <header>
   <div class="site-identity">
     <a href="home.php"><img src="assets/logo.jpeg" width="82px" height="80px" alt="logo"></a>
