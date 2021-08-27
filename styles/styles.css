@@ -512,4 +512,29 @@ form[name="signup"] {
   text-align: center;
   gap: 24px;
 }
+
+.form-style input {
+  padding: 0 1rem;
+  border: none;
+  border-bottom: 2px solid #ff6600;
+  background-color: rgba(250, 250, 250, 0.3);
+}
+
+.form-style input:focus, .form-style input:hover {
+  outline: none;
+  background-color: rgba(250, 250, 250, 0.7);
+}
+
+.form-style input[type="submit"] {
+  background-color: #ff6600;
+  border: 2px solid #ff6600;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.form-style input[type="submit"]:hover {
+  color: #ff6600;
+  background-color: #ffffff;
+  cursor: pointer;
+}
 /*# sourceMappingURL=styles.css.map */

@@ -72,7 +72,7 @@ function test_input($data)
     <?php require('components/_search.php'); ?>
     <div class="spacer center">
         <h2 class="padded">Login</h2>
-        <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form name="signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="form-style">
             <label for="email">email</label>
             <input type="email" name="email" placeholder="yourname@example.com" value="<?php echo $email; ?>" required>
             <span class="error">* <?php echo $emailError; ?></span>
