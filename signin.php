@@ -31,14 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
 $formEmpty = $email . $password;
 if ($formOk === "" && $formEmpty !== "") {
-    $sql = "SELECT password FROM users WHERE email='$email'";
+    $sql = "SELECT `email`, `password`, `acc_type` FROM users WHERE email='$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $passhash = $result->fetch_assoc()['password'];
+        $row = $result->fetch_assoc();
+        $passhash = $row['password'];
         $loggedin = password_verify($password, $passhash);
         if ($loggedin) {
             $_SESSION['loggedin'] = $loggedin;
-            $_SESSION['email'] = $email;
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['type'] = $row['acc_type'];
             $userMsg = 'user logged in';
             header("location:/onlinelibrary/home.php");
         } else {

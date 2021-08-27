@@ -13,6 +13,9 @@
       <li><a href="home.php">Home</a></li>
       <li><a href="browse.php">Browse</a></li>
       <?php if (!empty($_SESSION['email']) || isset($_SESSION['email'])) { ?>
+        <?php if (isset($_SESSION['type']) && $_SESSION['type'] == 'admin') { ?>
+          <li><a href="#">Admin Panel</a></li>
+        <?php } ?>
         <li>
           <form action="logout.php" method="post">
             <button type="submit" name="logout">Log Out</button>
