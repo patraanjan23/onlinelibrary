@@ -459,6 +459,11 @@ form[name="signup"] {
   border-radius: 2px;
 }
 
+.has-shadow {
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+}
+
 .about-page {
   background-color: rgba(255, 102, 0, 0.8);
   color: white;
@@ -469,5 +474,42 @@ form[name="signup"] {
 .about-page p {
   padding: 0.5rem 0;
   color: #f9f9f9;
+}
+
+.book {
+  min-width: 100%;
+  min-height: 200px;
+  place-self: center;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.book img {
+  width: auto;
+  height: 100px;
+  padding-top: 1rem;
+}
+
+.book p {
+  padding: 0 8px;
+}
+
+.book:hover {
+  background-color: rgba(255, 102, 0, 0.85);
+  color: #ffffff;
+}
+
+.bookgrid {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  text-align: center;
+  gap: 24px;
 }
 /*# sourceMappingURL=styles.css.map */
