@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Check Fine</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="chk-fine">
         <input type="text" name="userid" placeholder="User ID">
         <input type="submit" value="Check Fine">
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Adjust Fine Paid</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="adj-fine">
         <input type="text" name="userid" placeholder="User ID">
         <input type="text" name="fine" placeholder="Fine Amount in Rs.">

@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Delete User</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="delete-user">
         <input type="email" name="email" placeholder="Email of user to be deleted">
         <input type="submit" value="Delete User">
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Create New User</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="create-user">
         <input type="email" name="email" placeholder="Email address of new user">
         <input type="submit" value="Create User">

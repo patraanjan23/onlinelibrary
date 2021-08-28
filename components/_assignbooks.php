@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Assign Books</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="assign-book">
         <input type="text" name="userid" placeholder="User ID">
         <input type="text" name="bookid" placeholder="Book ID">

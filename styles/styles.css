@@ -514,7 +514,8 @@ form[name="signup"] {
 }
 
 .form-style input {
-  padding: 0 1rem;
+  padding: 2px 1rem;
+  margin: 4px;
   border: none;
   border-bottom: 2px solid #ff6600;
   background-color: rgba(250, 250, 250, 0.3);
@@ -527,7 +528,7 @@ form[name="signup"] {
 
 .form-style input[type="submit"] {
   background-color: #ff6600;
-  border: 2px solid #ff6600;
+  border: 1px solid #ff6600;
   border-radius: 4px;
   color: #ffffff;
 }
@@ -547,5 +548,47 @@ form[name="signup"] {
 
 .admin-panel li {
   padding: 0 1rem;
+  text-align: center;
+}
+
+.admin-panel li a {
+  padding: 1rem;
+  text-decoration: none;
+  color: #ff6600;
+  display: block;
+}
+
+.admin-panel li a:hover {
+  background-color: rgba(255, 102, 0, 0.8);
+  color: #ffffff;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.panel div {
+  padding: 8px;
+}
+
+.panel div form label {
+  padding-left: 8px;
+  font-size: smaller;
+  color: #ff6600;
 }
 /*# sourceMappingURL=styles.css.map */

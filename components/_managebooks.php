@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Add Books</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="add-books">
         <input type="text" name="title" placeholder="Title">
         <input type="text" name="author" placeholder="Author">
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Delete Books</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="del-books">
         <input type="text" name="bookid" placeholder="Book ID">
         <input type="submit" value="Delete Book">

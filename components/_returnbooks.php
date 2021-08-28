@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Return Books</h4>
-    <form method="post">
+    <form method="post" class="form-style">
         <input type="hidden" name="return-book">
         <input type="text" name="userid" placeholder="User ID">
         <input type="text" name="bookid" placeholder="Book ID">
-        <input type="date" name="retdate" id="retdate">
+        <label for="retdate">Return Date<input type="date" name="retdate" id="retdate"></label>
         <input type="submit" value="Return Book">
     </form>
     <p><?php if (isset($returnData['status'])) echo $returnData['status']; ?></p>
