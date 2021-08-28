@@ -150,3 +150,77 @@ function assignBook($conn, $userid, $bookid, $bordate, $duedate)
     $stmt->close();
     return $val;
 }
+
+function hasBorrowed($conn, $userid, $bookid)
+{
+    $val = false;
+    $sql = "SELECT * FROM borrows WHERE user_id=? AND book_id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $userid, $bookid);
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if (!empty($row['borrow_date']) && empty($row['return_date'])) {
+                $val = true;
+            }
+        }
+    }
+    $stmt->close();
+    return $val;
+}
+
+function returnBook($conn, $userid, $bookid, $retdate)
+{
+    $val = '';
+    $sql = "UPDATE borrows SET return_date = ? WHERE user_id = ? AND book_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sii', $retdate, $userid, $bookid);
+    if ($stmt->execute()) {
+        // calculate fine if they have
+        $fine = calcFine($conn, $userid, $bookid);
+
+        $val = "book $bookid returned." . ($fine == 0 ? "" : " fine: Rs. $fine");
+    } else {
+        $val = "could not return the book";
+    }
+    $stmt->close();
+    return $val;
+}
+
+// don't call explicitly
+function calcFine($conn, $userid, $bookid)
+{
+    $fine = 0;
+
+    // check if fine is needed
+    $fineRequired = false;
+    $duedate = $retdate = '';
+    $sql = "SELECT due_date, return_date FROM borrows WHERE user_id = ? AND book_id = ?";
+    $stmt1 = $conn->prepare($sql);
+    $stmt1->bind_param('ii', $userid, $bookid);
+    if ($stmt1->execute()) {
+        $result = $stmt1->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $duedate = $row['due_date'];
+            $retdate = $row['return_date'];
+            $fineRequired = $retdate > $duedate;
+        }
+    }
+    if ($fineRequired) {
+        // calculate and update fine in fines table
+        $days = round((strtotime($retdate) - strtotime($duedate)) / (60 * 60 * 24));
+        $fine = 2.0 * $days;
+
+        $sql = "INSERT INTO fines (user_id, due) VALUES (?, ?)
+                ON DUPLICATE KEY
+                UPDATE due = due + ?";
+        $stmt2 = $conn->prepare($sql);
+        $stmt2->bind_param("idd", $userid, $fine, $fine);
+        if ($stmt2->execute()) {
+            return $fine;
+        }
+        return $fine;
+    }
+}

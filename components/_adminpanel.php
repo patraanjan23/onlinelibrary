@@ -18,7 +18,7 @@
     <?php require('_assignbooks.php'); ?>
 </div>
 <div class="panel" id="panel4">
-    return
+    <?php require('_returnbooks.php'); ?>
 </div>
 <div class="panel" id="panel5">
     fines
