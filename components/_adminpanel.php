@@ -15,7 +15,7 @@
     <?php require('_managebooks.php'); ?>
 </div>
 <div class="panel" id="panel3">
-    assign
+    <?php require('_assignbooks.php'); ?>
 </div>
 <div class="panel" id="panel4">
     return

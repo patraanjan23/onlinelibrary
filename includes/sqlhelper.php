@@ -108,3 +108,45 @@ function delBook($conn, $bookid)
     $stmt->close();
     return $result;
 }
+
+function isBookAvailable($conn, $bookid)
+{
+    $val = false;
+    $sql = "SELECT `b`.`book_id` `book_id`, `borrow_date`, `return_date`, `due_date` FROM `books` `b` LEFT JOIN `borrows` `bw` ON `b`.`book_id` = `bw`.`book_id` WHERE `b`.`book_id` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $bookid);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if (empty($row['borrow_date'])) {
+                $val = true;
+            } elseif (!empty($row['return_date'])) {
+                $val = true;
+            }
+        }
+    }
+    $stmt->close();
+    return $val;
+}
+
+function assignBook($conn, $userid, $bookid, $bordate, $duedate)
+{
+    $val = '';
+    $sql = "INSERT INTO borrows 
+            (book_id, user_id, borrow_date, due_date, return_date) 
+            values(?, ?, ?, ?, NULL) 
+            ON DUPLICATE KEY 
+            UPDATE borrow_date=?, due_date=?, return_date=NULL";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('iissss', $bookid, $userid, $bordate, $duedate, $bordate, $duedate);
+    if ($stmt->execute()) {
+        $val = "book $bookid assigned to user $userid on $bordate, due date $duedate";
+    } else {
+        $val = "book assignment failed";
+    }
+    $stmt->close();
+    return $val;
+}
