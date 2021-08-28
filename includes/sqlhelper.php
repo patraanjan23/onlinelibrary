@@ -218,9 +218,62 @@ function calcFine($conn, $userid, $bookid)
                 UPDATE due = due + ?";
         $stmt2 = $conn->prepare($sql);
         $stmt2->bind_param("idd", $userid, $fine, $fine);
-        if ($stmt2->execute()) {
-            return $fine;
-        }
-        return $fine;
+        $stmt2->execute();
     }
+    return $fine;
+}
+
+function checkFine($conn, $userid)
+{
+    $sql = "SELECT * FROM fines WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $userid);
+    $val = '';
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $val = "fine for user $userid:" . ' due: Rs. ' . $row['due'] . ', paid: Rs. ' . (empty($row['paid']) ? '0' : $row['paid']);
+        } else {
+            $val = "no fine found for user $userid";
+        }
+    }
+    $stmt->close();
+    return $val;
+}
+
+function adjustFine($conn, $userid, $fine)
+{
+    $val = '';
+    $sql = "SELECT * FROM fines WHERE user_id = ?";
+    $stmt1 = $conn->prepare($sql);
+    $stmt1->bind_param('i', $userid);
+    if ($stmt1->execute()) {
+        $result = $stmt1->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $due = $row['due'];
+            $paid = $row['paid'];
+            // don't overpay, the case is not handled
+            if ($due != 0) {
+                $sql = "UPDATE fines SET due = due - ?, paid = " . (empty($paid) ? '' : " paid + ") . " ? WHERE user_id = ?";
+                $stmt2 = $conn->prepare($sql);
+                $stmt2->bind_param('ddi', $fine, $fine, $userid);
+                if ($stmt2->execute()) {
+                    $val = "fine adjusted for user $userid";
+                } else {
+                    $val = "fine could not be adjusted for user $userid";
+                }
+                $stmt2->close();
+            } else {
+                $val = "user $userid has no fine";
+            }
+        } else {
+            $val = "user $userid has no fine";
+        }
+    } else {
+        $val = "error executing sql";
+    }
+    $stmt1->close();
+    return $val;
 }

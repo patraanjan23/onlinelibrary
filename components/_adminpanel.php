@@ -21,5 +21,5 @@
     <?php require('_returnbooks.php'); ?>
 </div>
 <div class="panel" id="panel5">
-    fines
+    <?php require('_fine.php'); ?>
 </div>
