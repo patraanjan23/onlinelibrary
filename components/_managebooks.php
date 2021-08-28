@@ -25,6 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $addBookData['status'] = 'error in book data';
         }
     } elseif (isset($_POST['del-books'])) {
+        $formName = 'del-books';
+        $bookid = retrieveBookId($_POST['bookid']);
+        if ($bookid !== null) {
+            $delBookData['status'] = delBook($conn, $bookid);
+        } else {
+            $delBookData['status'] = 'error bookid format';
+        }
     }
 }
 
@@ -44,4 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div>
     <h4>Delete Books</h4>
+    <form method="post">
+        <input type="hidden" name="del-books">
+        <input type="text" name="bookid" placeholder="Book ID">
+        <input type="submit" value="Delete Book">
+        <p><?php if (isset($delBookData['status'])) echo $delBookData['status']; ?></p>
+    </form>
 </div>

@@ -84,7 +84,27 @@ function addBook($conn, $title, $author, $isbn)
     $isbn = $isbn;
     $author = $author;
     $stmt->execute();
-    $result = !$stmt ? null : $isbn;
+    $result = $stmt->error === "" ? $isbn : null;
+    $stmt->close();
+    return $result;
+}
+
+function retrieveBookId($postBookId)
+{
+    if (empty($postBookId)) {
+        return null;
+    }
+    $bookid = sanitize_input($postBookId);
+    return $bookid;
+}
+
+function delBook($conn, $bookid)
+{
+    $stmt = $conn->prepare("DELETE FROM books WHERE book_id = ?");
+    $stmt->bind_param('i', $bookid);
+    $bookid = $bookid;
+    $stmt->execute();
+    $result = $stmt->error === "" ? "deleted book $bookid successfully" : "could not delete book $bookid, may be borrowed";
     $stmt->close();
     return $result;
 }
