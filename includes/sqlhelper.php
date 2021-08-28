@@ -57,3 +57,34 @@ function createUser($conn, $email)
     }
     return $password;
 }
+
+function retrieveBook($postTitle, $postAuthor, $postISBN)
+{
+    if (empty($postTitle) || empty($postAuthor) || empty($postISBN)) {
+        return null;
+    }
+    $book = array();
+    $book['title'] = sanitize_input($postTitle);
+    $book['author'] = sanitize_input($postAuthor);
+    $book['isbn'] = sanitize_input($postISBN);
+
+    // uncomment to enable ISBN check
+    // if (strlen($book['isbn']) !== 10 || strlen($book['isbn']) !== 13) {
+    //     return null;
+    // }
+
+    return $book;
+}
+
+function addBook($conn, $title, $author, $isbn)
+{
+    $stmt = $conn->prepare("INSERT INTO books (title, author, isbn) VALUES(?, ?, ?)");
+    $stmt->bind_param("sss", $title, $author, $isbn);
+    $title = $title;
+    $isbn = $isbn;
+    $author = $author;
+    $stmt->execute();
+    $result = !$stmt ? null : $isbn;
+    $stmt->close();
+    return $result;
+}

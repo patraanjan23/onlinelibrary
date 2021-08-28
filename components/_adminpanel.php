@@ -12,7 +12,7 @@
     <?php require('_manageusers.php') ?>
 </div>
 <div class="panel" id="panel2">
-    books
+    <?php require('_managebooks.php'); ?>
 </div>
 <div class="panel" id="panel3">
     assign
