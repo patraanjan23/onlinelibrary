@@ -272,20 +272,21 @@ footer .copyright {
 }
 
 .bookdetails {
+  padding: 1rem;
+  width: 60%;
+  min-width: 800px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.65);
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: minmax(400px, 0.25fr) 1fr;
       grid-template-columns: minmax(400px, 0.25fr) 1fr;
   -ms-grid-rows: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
-      grid-template-areas: "cover ." "cover ." "cover ." "cover ." "cover ." "cover ." "cover .";
-  padding: 1rem;
-  width: 60%;
-  min-width: 800px;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  -webkit-box-shadow: 1px 1px 8px #999;
-          box-shadow: 1px 1px 8px #999;
+      grid-template-areas: "cover title" "cover author" "cover category" "cover description" "cover isbn" "cover edition" "cover borrow";
 }
 
 .bookdetails img {
@@ -295,8 +296,50 @@ footer .copyright {
   grid-area: cover;
   place-self: center;
   border-radius: 8px;
-  -webkit-box-shadow: 4px 4px 10px darkgrey;
-          box-shadow: 4px 4px 10px darkgrey;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bookdetails .bd-title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: title;
+}
+
+.bookdetails .bd-author {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: author;
+}
+
+.bookdetails .bd-cat {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: category;
+}
+
+.bookdetails .bd-desc {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: description;
+}
+
+.bookdetails .bd-isbn {
+  -ms-grid-row: 5;
+  -ms-grid-column: 2;
+  grid-area: isbn;
+}
+
+.bookdetails .bd-edition {
+  -ms-grid-row: 6;
+  -ms-grid-column: 2;
+  grid-area: edition;
+}
+
+.bookdetails .bd-borrow {
+  -ms-grid-row: 7;
+  -ms-grid-column: 2;
+  grid-area: borrow;
 }
 
 .bookdetails div {
@@ -308,7 +351,26 @@ footer .copyright {
 }
 
 .bookdetails button {
-  margin: 1rem;
+  margin: 16px;
+  border-radius: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: none;
+  font-size: 1.15rem;
+}
+
+.bookdetails button:enabled {
+  color: #ffffff;
+  background-color: #ff6600;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bookdetails button:enabled:hover {
+  background-color: #ffffff;
+  color: #ff6600;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 form[name="signin"],
@@ -590,5 +652,39 @@ form[name="signup"] {
   padding-left: 8px;
   font-size: smaller;
   color: #ff6600;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 25%;
+  background-color: rgba(255, 102, 0, 0.97);
+  color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 4px;
+  text-align: center;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal h2, .modal h3, .modal p {
+  padding: 1rem;
+}
+
+.modal a {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgba(204, 82, 0, 0.5);
+  display: block;
+  padding: 0 8px 6px 8px;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.modal a:hover {
+  background-color: rgba(153, 61, 0, 0.5);
 }
 /*# sourceMappingURL=styles.css.map */

@@ -31,14 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
 $formEmpty = $email . $password;
 if ($formOk === "" && $formEmpty !== "") {
-    $sql = "SELECT `email`, `password`, `acc_type` FROM users WHERE email='$email'";
+    $sql = "SELECT `id`, `email`, `password`, `acc_type` FROM users WHERE email='$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $passhash = $row['password'];
         $loggedin = password_verify($password, $passhash);
         if ($loggedin) {
-            $_SESSION['loggedin'] = $loggedin;
+            $_SESSION['user_id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['type'] = $row['acc_type'];
             $userMsg = 'user logged in';

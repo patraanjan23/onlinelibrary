@@ -20,6 +20,7 @@ function show_book($result)
     if ($result !== null && $result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             // var_dump($row);
+            $bookid = $row['book_id'];
             $cover = $row['cover'];
             $title = $row['title'];
             $author = $row['author'];
@@ -30,6 +31,8 @@ function show_book($result)
             $bookavailable = $row['borrow_date'] ? ($row['return_date'] ? (strtotime($row['return_date']) > strtotime($row['borrow_date']) ? true : false) : false) : true;
             require('components/_bookdetails.php');
         }
+    } else {
+        echo "<p>Book does not exist.</p>";
     }
 }
 
@@ -51,6 +54,7 @@ function show_book($result)
         <?php show_book($result); ?>
     </div>
     <?php require('components/_footer.php'); ?>
+    <script src="scripts/book.js"></script>
 </body>
 
 </html>
