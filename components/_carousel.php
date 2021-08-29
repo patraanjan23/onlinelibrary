@@ -6,10 +6,10 @@ $sql = "SELECT * FROM `books` LIMIT 4";
 $result = $conn->query($sql);
 // var_dump($result->fetch_assoc());
 
-function echoBooks($title, $cover)
+function echoBooks($bookid, $title, $cover)
 {
     echo '<div class="swiper-slide">' .
-        '<img src="' . $cover . '" alt="' . $title . '">' .
+        '<a href="book.php?id=' . $bookid . '"><img src="' . $cover . '" alt="' . $title . '"></a>' .
         '<h4>' . $title . '</h4>' .
         '</div>';
 }
@@ -24,7 +24,7 @@ function echoBooks($title, $cover)
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echoBooks($row['title'], $row['cover']);
+                echoBooks($row['book_id'], $row['title'], $row['cover']);
             }
         }
         ?>
