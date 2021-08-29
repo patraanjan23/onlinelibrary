@@ -5,14 +5,14 @@
 </script>
 <header>
   <div class="site-identity">
-    <a href="home.php"><img src="assets/logo.jpeg" width="82px" height="80px" alt="logo"></a>
-    <a href="home.php">
+    <a href="index.php"><img src="assets/logo.jpeg" width="82px" height="80px" alt="logo"></a>
+    <a href="index.php">
       <h1><?php require('components/_title.php'); ?></h1>
     </a>
   </div>
   <nav class="site-navigation">
     <ul class="nav">
-      <li><a href="home.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <li><a href="browse.php">Browse</a></li>
       <?php if (!empty($_SESSION['email']) || isset($_SESSION['email'])) { ?>
         <?php if (isset($_SESSION['type']) && $_SESSION['type'] == 'admin') { ?>

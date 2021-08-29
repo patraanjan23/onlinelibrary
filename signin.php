@@ -42,7 +42,7 @@ if ($formOk === "" && $formEmpty !== "") {
             $_SESSION['email'] = $row['email'];
             $_SESSION['type'] = $row['acc_type'];
             $userMsg = 'user logged in';
-            header("location: home.php");
+            header("location: index.php");
         } else {
             $passError = "invalid password, try again";
         }
