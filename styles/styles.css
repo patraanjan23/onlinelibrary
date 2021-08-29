@@ -110,6 +110,11 @@ header .site-identity h1 {
   display: inline-block;
 }
 
+header .site-identity a {
+  text-decoration: none;
+  color: black;
+}
+
 header .site-navigation {
   float: right;
 }

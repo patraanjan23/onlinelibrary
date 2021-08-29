@@ -6,7 +6,9 @@
 <header>
   <div class="site-identity">
     <a href="home.php"><img src="assets/logo.jpeg" width="82px" height="80px" alt="logo"></a>
-    <h1><?php require('components/_title.php'); ?></h1>
+    <a href="home.php">
+      <h1><?php require('components/_title.php'); ?></h1>
+    </a>
   </div>
   <nav class="site-navigation">
     <ul class="nav">
