@@ -49,10 +49,7 @@ if ($formOk === "" && $formEmpty !== "") {
     } else {
         $userMsg = "user does not exist";
     }
-} else {
-    $userMsg = 'form invalid';
 }
-
 function test_input($data)
 {
     $data = trim($data);

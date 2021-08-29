@@ -68,10 +68,9 @@ if ($formOk === "" && $formEmpty !== "") {
             $userMsg = $userMsg . "<br>" . 'could not create user';
         } else {
             $userMsg = $userMsg . "<br>" . 'user ' . $email . ' created successfully';
+            header('location: signin.php');
         }
     }
-} else {
-    $userMsg = "form invalid";
 }
 
 
@@ -113,7 +112,7 @@ function test_input($data)
             <input type="submit" value="Sign Up">
             <span></span>
         </form>
-        <?php echo $email . "<br>" . $password . "<br>" . (isset($passhash) ? $passhash : ""); ?>
+
         <span class="padded"><?php echo $userMsg ?></span>
     </div>
     <?php require('components/_footer.php'); ?>
