@@ -426,8 +426,8 @@ form[name="signup"] {
   width: 800px;
   height: 450px;
   border-radius: 4px;
-  -webkit-box-shadow: 1px 1px 8px gray;
-          box-shadow: 1px 1px 8px gray;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .swiper .swiper-button-prev,
@@ -460,6 +460,11 @@ form[name="signup"] {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 3px;
+}
+
+.smaller {
+  width: 480px;
+  height: 270px;
 }
 
 .bg-a {
@@ -501,8 +506,8 @@ form[name="signup"] {
   padding: 1rem;
   background-color: rgba(230, 230, 230, 0.5);
   border-radius: 4px;
-  -webkit-box-shadow: 1px 1px 8px gray;
-          box-shadow: 1px 1px 8px gray;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .noticeboard h2 {
