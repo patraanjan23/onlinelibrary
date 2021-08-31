@@ -668,6 +668,9 @@ form[name="signup"] {
   display: none;
   position: fixed;
   top: 25%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   background-color: rgba(255, 102, 0, 0.97);
   color: #ffffff;
   padding: 1.5rem;
