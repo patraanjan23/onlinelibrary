@@ -41,11 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function check_user_exists($conn, $email)
 {
-    $sql = "SELECT email FROM users WHERE email='$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT email FROM users WHERE email=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $email);
 
-    if ($result->num_rows > 0) {
-        return true;
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        return ($result->num_rows > 0);
     }
     return false;
 }
@@ -61,14 +63,16 @@ if ($formOk === "" && $formEmpty !== "") {
         $userMsg = 'user already exists';
     } else {
         $userMsg = 'user does not exist';
-        $sql = "INSERT INTO library.users (password, name, email, acc_type, mobile, address) 
-                                        VALUES('$passhash', NULL, '$email', 'normal', NULL, NULL)";
-        $result = $conn->query($sql);
-        if (!$result) {
-            $userMsg = $userMsg . "<br>" . 'could not create user';
-        } else {
+        $sql = "INSERT INTO users (password, name, email, acc_type, mobile, address) 
+                                        VALUES(?, NULL, ?, 'normal', NULL, NULL)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $passhash, $email);
+
+        if ($stmt->execute()) {
             $userMsg = $userMsg . "<br>" . 'user ' . $email . ' created successfully';
             header('location: signin.php');
+        } else {
+            $userMsg = $userMsg . "<br>" . 'could not create user';
         }
     }
 }
