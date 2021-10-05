@@ -10,8 +10,11 @@ $result = null;
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $id = sanitize_input($_GET["id"]);
     if (!empty($id)) {
-        $sql = "SELECT `b`.`book_id` `book_id`, `isbn`, `title`, `author`, `category`, `edition`, `borrow_date`, `return_date`, `due_date`, `description`, `cover` FROM `books` `b` LEFT JOIN `borrows` `bw` ON `b`.`book_id` = `bw`.`book_id` WHERE `b`.`book_id` = $id";
-        $result = $conn->query($sql);
+        $sql = "SELECT `b`.`book_id` `book_id`, `isbn`, `title`, `author`, `category`, `edition`, `borrow_date`, `return_date`, `due_date`, `description`, `cover` FROM `books` `b` LEFT JOIN `borrows` `bw` ON `b`.`book_id` = `bw`.`book_id` WHERE `b`.`book_id` = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $conn->quote($id));
+        $stmt->execute();
+        $result = $stmt->get_result();        
     }
 }
 

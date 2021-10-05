@@ -11,8 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $search = sanitize_input($_GET["search"]);
     $searchBy = sanitize_input($_GET["searchby"]);
     if (!empty($search) && !empty($searchBy)) {
-        $sql = "SELECT `b`.`book_id` `book_id`, `isbn`, `title`, `author`, `category`, `edition`, `borrow_date`, `return_date`, `due_date` FROM `books` `b` LEFT JOIN `borrows` `bw` ON `b`.`book_id` = `bw`.`book_id` WHERE $searchBy LIKE '%$search%'";
-        $result = $conn->query($sql);
+        $sql = "SELECT `b`.`book_id` `book_id`, `isbn`, `title`, `author`, `category`, `edition`, `borrow_date`, `return_date`, `due_date` FROM `books` `b` LEFT JOIN `borrows` `bw` ON `b`.`book_id` = `bw`.`book_id` WHERE ? LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $searchBy, $conn->quote('%'. $id. '%'));
+        $stmt->execute();
+        $result = $stmt->get_result();      
     }
 }
 

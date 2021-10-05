@@ -6,8 +6,11 @@ require_once('includes/sanitizer.php');
 function deleteUser($conn, $email)
 {
     $status = '';
-    $sql = "DELETE FROM users WHERE email LIKE '$email'";
-    $result = $conn->query($sql);
+    $sql = "DELETE FROM users WHERE email LIKE ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $conn->quote('%'.$email.'%'));
+    $stmt->execute();
+    $result = $stmt->get_result();     
     if ($result) {
         $status = "user $email deleted";
     } else {
@@ -18,8 +21,11 @@ function deleteUser($conn, $email)
 
 function userExists($conn, $email)
 {
-    $sql = "SELECT email FROM users WHERE email LIKE '$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT email FROM users WHERE email LIKE ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $conn->quote('%'.$email.'%'));
+    $stmt->execute();
+    $result = $stmt->get_result();     
     return ($result->num_rows > 0);
 }
 
@@ -50,8 +56,11 @@ function createUser($conn, $email)
 {
     $password = generate_password();
     $passhash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `users` (`password`, `email`) VALUES('$passhash', '$email')";
-    $result = $conn->query($sql);
+    $sql = "INSERT INTO `users` (`password`, `email`) VALUES(?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $passhash, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();     
     if (!$result) {
         $password = null;
     }
