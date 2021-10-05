@@ -22,7 +22,7 @@ function echoBooks($bookid, $title, $cover)
     <div class="swiper-wrapper">
         <!-- Slides -->
         <?php
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echoBooks($row['book_id'], $row['title'], $row['cover']);
             }

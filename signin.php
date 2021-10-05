@@ -31,8 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $formOk = $GLOBALS['emailError'] . $GLOBALS['passError'];
 $formEmpty = $email . $password;
 if ($formOk === "" && $formEmpty !== "") {
-    $sql = "SELECT `id`, `email`, `password`, `acc_type` FROM users WHERE email='$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT `id`, `email`, `password`, `acc_type` FROM users WHERE email=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $conn->quote($email));
+    $stmt->execute();
+    $result = $stmt->get_result();     
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $passhash = $row['password'];
